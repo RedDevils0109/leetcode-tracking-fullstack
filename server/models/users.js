@@ -46,6 +46,7 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.methods.getResetToken = function () {
+
   const token = jwt.sign({ id: this._id }, process.env.JWT_RESET_SECRET, {
     expiresIn: process.env.RESET_EXPIRE_TIME,
   });

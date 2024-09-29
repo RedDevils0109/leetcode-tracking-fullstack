@@ -6,7 +6,7 @@ const ErrorHandler = require("../utils/errorHandler");
 exports.isAuthenticatedUser = catchAsync(async (req, res, next) => {
   // Extract Bearer Token from the Authorization header
   const authHeader = req.headers.authorization;
-  let accessToken;
+  
 
   if (authHeader && authHeader.startsWith("Bearer")) {
     accessToken = authHeader.split(" ")[1];
@@ -18,15 +18,16 @@ exports.isAuthenticatedUser = catchAsync(async (req, res, next) => {
   // Verify the reset token if present
   try {
     const resetToken = req.cookies.resetToken;
+  
     if (!resetToken) {
       return next(new ErrorHandler("Reset token not found", 401));
     }
+ 
 
     const resetTokenDecoded = jwt.verify(
       resetToken,
       process.env.JWT_RESET_SECRET
     );
-
   } catch (error) {
     if (error.name === "TokenExpiredError") {
       return next(new ErrorHandler("Reset token expired", 401)); // Handle expired reset token
@@ -38,7 +39,7 @@ exports.isAuthenticatedUser = catchAsync(async (req, res, next) => {
   let decoded;
   try {
     decoded = jwt.verify(accessToken, process.env.JWT_ACCESS_SECRET);
-    console.log("Decoded: ", decoded);
+    
     req.userId = decoded.id; // Attach decoded user info to the request object
   } catch (error) {
     if (error.name === "TokenExpiredError") {

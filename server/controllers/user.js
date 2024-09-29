@@ -3,7 +3,7 @@ const catchAsync = require("../middlewares/catchAsync");
 
 exports.getUserProfile = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.userId);
-  console.log(user);
+ 
   const userData = {
     name: user.name,
     email: user.email,

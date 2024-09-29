@@ -1,7 +1,7 @@
 import React from "react";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { Link,  useNavigate } from "react-router-dom";
 import api from "../utils/normalApi";
-import axios from "axios";
+
 const Navbar = () => {
   const token = localStorage.getItem("token");
   // Retrieve the user data from localStorage
@@ -13,7 +13,7 @@ const Navbar = () => {
 
   const logout = async () => {
     try {
-      const response = await axios.get("/auth/logout"); // Make sure this endpoint is correct
+      const response = await api.get("/auth/logout"); // Make sure this endpoint is correct
       const data = response.data;
 
       if (data.success === true) {
@@ -48,21 +48,38 @@ const Navbar = () => {
         <div className="flex items-center gap-6">
           {token ? (
             <>
-              <div
-                className="w-10 h-10 rounded-full bg-cover"
-                style={{ backgroundImage: `url(${userImage})` }}
-              ></div>
+              <Link to={"/profile"}>
+                <div
+                  className="w-10 h-10 rounded-full bg-cover bg-center"
+                  style={{ backgroundImage: `url(${userImage})` }}
+                ></div>
+              </Link>
               <button className="text-slate-200 px-1 py-2 rounded-full">
-                <a onClick={() => logout()}>Sign out</a>
+                <a
+                  onClick={() => logout()}
+                  className="relative inline-block hover:text-blue-200 border-b-2 border-transparent hover:border-blue-200 transition-all duration-300"
+                >
+                  Sign out
+                </a>
               </button>
             </>
           ) : (
             <>
               <button className="text-slate-200 px-1 py-2 rounded-full">
-                <Link to={"/sign-in"}>Sign in</Link>
+                <Link
+                  to={"/sign-in"}
+                  className="relative inline-block hover:text-blue-200 border-b-2 border-transparent hover:border-blue-200 transition-all duration-300"
+                >
+                  Sign in
+                </Link>
               </button>
               <button className="text-slate-200 px-1 py-2 rounded-full">
-                <Link to={"/sign-up"}>Sign up</Link>
+                <Link
+                  to={"/sign-up"}
+                  className="relative inline-block hover:text-blue-200 border-b-2 border-transparent hover:border-blue-200 transition-all duration-300"
+                >
+                  Sign up
+                </Link>
               </button>
             </>
           )}
