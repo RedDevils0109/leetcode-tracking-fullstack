@@ -9,8 +9,13 @@ const ErrorHandler = require("./utils/errorHandler");
 const connectDatabase = require("./config/database");
 const cors = require("cors");
 
+
 env.config();
 const port = process.env.PORT || 5000;
+
+
+const passport = require("passport");
+require("./config/passport-setup");
 
 // Connect to database
 connectDatabase();
@@ -33,6 +38,8 @@ app.use(cookieParser()); // Ensure cookie parser is set before routes
 
 // Sanitize data to prevent NoSQL injection
 app.use(sanitize());
+
+app.use(passport.initialize());
 
 // Setup CORS to allow frontend requests
 
@@ -66,4 +73,5 @@ app.use(errorMiddleware);
 // Start server
 app.listen(port, () => {
   console.log(`LISTENING ON PORT ${port}`);
+
 });
