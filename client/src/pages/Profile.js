@@ -23,7 +23,7 @@ const Profile = () => {
     <div className="flex flex-col h-[80vh] justify-center items-center">
       <div
         className="w-20 h-20 rounded-full bg-cover bg-center"
-        style={{ backgroundImage: `url(${user.image})` }}
+        style={{ backgroundImage: `url(${user.image})` }}cd ser
       ></div>
 
       <h1>Name : {user.name}</h1>

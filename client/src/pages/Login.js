@@ -13,6 +13,14 @@ const Login = () => {
     handleSubmit,
   } = useForm();
 
+  const handleGoogleLogin = () => {
+    try {
+      window.location.href = "http://localhost:5000/auth/google";
+    } catch (error) {
+      setError(error);
+    }
+  };
+
   const onSubmit = async (value) => {
     try {
       const response = await api.post("/auth/login", {
@@ -82,6 +90,19 @@ const Login = () => {
           Submit
         </button>
       </form>
+      <div className="flex justify-center items-center text-center">
+        <p className="flex items-center">
+          Or login with{" "}
+          <span className="ml-2">
+            <img
+              src="/images/google.png"
+              className="w-16 cursor-pointer bg-white p-1 rounded"
+              alt="Google logo"
+              onClick={() => handleGoogleLogin()}
+            />
+          </span>
+        </p>
+      </div>
     </div>
   );
 };

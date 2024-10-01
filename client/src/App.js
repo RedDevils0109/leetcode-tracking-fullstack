@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import Leetcode from "./pages/Leetcode";
 import NewLeetcode from "./pages/NewLeetcode";
 import EditLeetcode from "./pages/EditLeetcode";
+import GoogleAuthCallback from "./pages/GoogleAuthCallback";
 function App() {
   return (
     <BrowserRouter>
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/sign-in" element={<Login />}></Route>
         <Route path="/sign-up" element={<Signup />}></Route>
+        <Route path="/google-auth" element={<GoogleAuthCallback />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
         <Route path="/leetcode" element={<Leetcode />}></Route>
         <Route path="/leetcode/new" element={<NewLeetcode />}></Route>
